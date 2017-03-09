@@ -59,11 +59,13 @@ h1 {
 }
 
 
-.number-display {
+#number-display {
   padding: 1rem;
   margin: 0 0 2rem 0;
   font-family: 'digital-7_monomono';
   font-size: 4rem;
+  line-height: 4rem;
+  height: 6.8rem;
   background: #dfd5e3;
   color: #433c4e;
   border: .5rem solid #625772;
@@ -105,13 +107,27 @@ form * {
                 0 .8rem 0 #dacfbf,
                 0 .8rem 5px rgba(53,106,129,.5);
   cursor: pointer;
+  transition: .1s all ease;
+}
+.btn:active {
+  transform: translateY(.4rem);
+  transition: .001s all ease;
+  box-shadow: 0 .05rem 0 #ede4d8,
+                0 .1rem 0 #e9e0d3,
+                0 .2rem 0 #dfd5c7,
+                0 .4rem 0 #dacfbf,
+                0 .4rem 5px rgba(53,106,129,.5);
 }
 
 .btn:first-child {
   margin-left: 0;
 }
-.btn:focus, .btn:active {
-  border-color: #4796ff;
+.btn:hover {
+  background-color: #fffef9;
+}
+.btn:focus, .btn:hover {
+  /*border-color: #4796ff;
+  border-color: #dfd5c7;*/
 }
 
 .operators {
