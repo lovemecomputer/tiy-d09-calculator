@@ -106,6 +106,7 @@ btn_add.onclick = function() {
   currentOperator = 'add';
   previousNumber = currentNumber;
   currentNumber = '';
+  updateDisplay();
 };
 
 btn_sub.onclick = function() {
