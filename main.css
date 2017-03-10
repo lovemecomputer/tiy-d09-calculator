@@ -90,6 +90,7 @@ form * {
 
 .btn {
   flex: 1;
+  position: relative;
   margin-left: .5rem;
   margin-bottom: 1.25rem;
   appearance: none;
@@ -109,6 +110,11 @@ form * {
   cursor: pointer;
   transition: .1s all ease;
 }
+.btn.btn-equals {
+  margin-left: 0;
+  width: calc(100% - 7rem);
+  display: block;
+}
 .btn:active {
   transform: translateY(.4rem);
   transition: .001s all ease;
@@ -125,9 +131,25 @@ form * {
 .btn:hover {
   background-color: #fffef9;
 }
-.btn:focus, .btn:hover {
+.btn:focus {
   /*border-color: #4796ff;
   border-color: #dfd5c7;*/
+}
+.btn:focus::before, .btn:focus::after {
+  content: '';
+  display: block;
+  width: 0;
+  position: absolute;
+  left: 1.05rem;
+  top: 1rem;
+  border-left: 1.6rem solid #85ffa0;
+  border-top: 1.2rem solid transparent;
+  border-bottom: 1.2rem solid transparent;
+}
+.btn:focus::before {
+  top: 1.1rem;
+  left: 1.2rem;
+  border-left-color: rgba(33,102,83,.46);
 }
 
 .operators {
@@ -139,6 +161,7 @@ form * {
 .operators .btn {
   display: block;
   width: 100%;
+  margin-left: 0;
 }
 
 

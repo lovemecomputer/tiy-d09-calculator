@@ -15,22 +15,9 @@ var btn_div = document.querySelector('.btn-div');
 var btn_mod = document.querySelector('.btn-mod');
 var btn_equals = document.querySelector('.btn-equals');
 
+
 var numberDisplay = document.querySelector('#number-display');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
 var currentNumber = '';
 var previousNumber = '';
 var currentOperator = '';
@@ -160,4 +147,3 @@ btn_equals.onclick = function() {
 
 // begin page!
 updateDisplay();
-*/
