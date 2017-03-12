@@ -14,6 +14,8 @@ var currentOperator = '';
 var currentNumber = '';
 var previousNumber = '';
 
+var solvedProblem = false;
+
 console.log(numberButtons);
 console.log(operatorButtons);
 console.log(btn_equals);
@@ -26,15 +28,16 @@ function numberInput(input) {
   if(input === 'C')
   {
     //hit clear key
-    clearAll();
+    clear();
   } else if(typeof input === 'string')
   {
     //number key input
-    if( String(currentOperator) === '' && String(previousNumber) === '' && String(currentNumber) !== '' )
+    if( solvedProblem && String(currentOperator) === '' && String(previousNumber) === '' && String(currentNumber) !== '' )
     {
       //this is the state for if we're displaying a result after previously
       //hitting the equals button
       currentNumber = input;
+      solvedProblem = false;
     }
     else
     {
@@ -87,6 +90,7 @@ btn_equals.addEventListener('click', function() {
     currentNumber = Number(doMath());
     previousNumber = '';
     currentOperator = '';
+    solvedProblem = true;
   }
   updateDisplay();
 });
@@ -109,11 +113,20 @@ function updateDisplay() {
     operatorDisplay.innerText = currentOperator;
 }
 
-function clearAll() {
-  console.log('CLEAR');
-  currentNumber = '';
-  currentOperator = '';
-
+function clear() {
+  if ( String(currentNumber) !== '' )
+  {
+    //if we have a current number just clear current display
+    console.log('CLEAR');
+    currentNumber = '';
+  } else {
+    // else clear all
+    console.log('CLEARALL');
+    currentNumber = '';
+    previousNumber = '';
+    currentOperator = '';
+    solvedProblem = false;
+  }
   updateDisplay();
 }
 
