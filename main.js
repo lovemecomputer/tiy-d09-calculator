@@ -23,11 +23,23 @@ console.log(operatorDisplay);
 
 //set up button behavior functions
 function numberInput(input) {
-  if(input === 'C') {
+  if(input === 'C')
+  {
+    //hit clear key
     clearAll();
-  } else if(typeof input === 'string') {
-    //input number
-    currentNumber += input;
+  } else if(typeof input === 'string')
+  {
+    //number key input
+    if( String(currentOperator) === '' && String(previousNumber) === '' && String(currentNumber) !== '' )
+    {
+      //this is the state for if we're displaying a result after previously
+      //hitting the equals button
+      currentNumber = input;
+    }
+    else
+    {
+      currentNumber += input;
+    }
   }
   updateDisplay();
 }
@@ -35,41 +47,48 @@ function numberInput(input) {
 function setOperator(input) {
 
 
+//if we have both numbers, do the math and set result to previousNumber,
+//then clear currentNumber and set operator
 
-  if( String(previousNumber) !== '' && String(currentNumber) ) {
+//if we have just a currentNumber and no previousNumber, just move
+//currentNumber to previousNumber and set operator
 
-  }
+//if we have only previousNumber and no currentNumber, just change
+//operator and do nothing else
+
+//if we have no numbers, do nothing
 
 
-
-  //if we have no currentNumber or previousNumber, do nothing
-
-  //if we're pushing operators continually before typing in a new number,
-  //just keep changing the operator w/ no other action
-
-  //else, add previousNumber to currentNumber,
-  //set previousNumber to result
-  //clear currentNumber
-  //set operator
-
-  /*if(String(currentNumber) === '' && String(previousNumber) === '') {
-    // do nothing
-  }
-  else if (String(currentNumber) === '' && String(previousNumber) !== '') {
+  if( String(previousNumber) !== '' && String(currentNumber) !== '' ) {
+    //if we have a value for both numbers
+    previousNumber = Number(doMath());
+    currentNumber = '';
     currentOperator = input;
-  } else {
-    doMath();
+  } else if ( String(previousNumber) === '' && String(currentNumber) !== '' ) {
+    //if we have valuse for currentNumber only
     previousNumber = currentNumber;
     currentNumber = '';
     currentOperator = input;
+  } else if ( String(previousNumber) !== '' && String(currentNumber) === '' ) {
+    //if we have only a previous number just change operator sign
+    //(this is if ppl keep clicking operators without entering new number)
+    currentOperator = input;
+  } else if ( String(previousNumber) === '' && String(currentNumber) === '' ) {
+    //if we have no numbers, do nothing
+  } else {
+    console.log('>>>>ERROR: unplanned setOperator error');
   }
-  updateDisplay();*/
+  //always do this after a click! maybe it'll trigger a screen-flashing animation
+  updateDisplay();
 }
 
 btn_equals.addEventListener('click', function() {
-  doMath();
+  if ( String(previousNumber) !== '' && String(currentNumber) !== '' ) {
+    currentNumber = Number(doMath());
+    previousNumber = '';
+    currentOperator = '';
+  }
   updateDisplay();
-
 });
 
 
@@ -103,24 +122,24 @@ function doMath() {
   var result;
 
   if (currentOperator === '+'){
-    result = previousNumber + currentNumber;
-    console.log(previousNumber + ' + ' + currentNumber + ' = ' + result);
+    result = Number(previousNumber) + Number(currentNumber);
+    console.log(Number(previousNumber) + ' + ' + Number(currentNumber) + ' = ' + result);
   }
   else if (currentOperator === '-') {
-    result = previousNumber - currentNumber;
-    console.log(previousNumber + ' - ' + currentNumber + ' = ' + result);
+    result = Number(previousNumber) - Number(currentNumber);
+    console.log(Number(previousNumber) + ' - ' + Number(currentNumber) + ' = ' + result);
   }
   else if (currentOperator === '*') {
-    result = previousNumber * currentNumber;
-    console.log(previousNumber + ' * ' + currentNumber + ' = ' + result);
+    result = Number(previousNumber) * Number(currentNumber);
+    console.log(Number(previousNumber) + ' * ' + Number(currentNumber) + ' = ' + result);
   }
   else if (currentOperator === '/') {
-    result = previousNumber / currentNumber;
-    console.log(previousNumber + ' / ' + currentNumber + ' = ' + result);
+    result = Number(previousNumber) / Number(currentNumber);
+    console.log(Number(previousNumber) + ' / ' + Number(currentNumber) + ' = ' + result);
   }
   else if (currentOperator === '%') {
-    result = previousNumber % currentNumber;
-    console.log(previousNumber + ' % ' + currentNumber + ' = ' + result);
+    result = Number(previousNumber) % Number(currentNumber);
+    console.log(Number(previousNumber) + ' % ' + Number(currentNumber) + ' = ' + result);
   }
   else {
     console.log('error');
