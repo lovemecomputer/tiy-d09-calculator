@@ -2,31 +2,123 @@
 console.log(document);
 console.dir(document);
 
-//var buttons = document.querySelectorAll('.btn');
 
-
-
-var numberButtons = document.querySelectorAll('.btn-num');
-
-var btn_add = document.querySelector('.btn-add');
-var btn_sub = document.querySelector('.btn-sub');
-var btn_mult = document.querySelector('.btn-mult');
-var btn_div = document.querySelector('.btn-div');
-var btn_mod = document.querySelector('.btn-mod');
+// find objects
+var numberButtons = document.querySelectorAll('.numbers .btn');
+var operatorButtons = document.querySelectorAll('.operators .btn');
 var btn_equals = document.querySelector('.btn-equals');
+var numberDisplay = document.querySelector('#number-display-value');
+var operatorDisplay = document.querySelector('#operator-display');
 
-var numberDisplay = document.querySelector('#number-display');
+var currentOperator = '';
+var currentNumber = '';
+var previousNumber = '';
+
+var startingNewNumber = false;
+
+console.log(numberButtons);
+console.log(operatorButtons);
+console.log(btn_equals);
+console.log(numberDisplay);
+console.log(operatorDisplay);
+
+
+//set up button behavior functions
+function numberInput(input) {
+  if(input === 'C') {
+    clearAll();
+  } else if(typeof input === 'string') {
+    //input number
+    if(startingNewNumber) {
+      if(previousNumber !== '' && currentOperator !== ''){
+        doMath();
+      } else { console.log('is this a possible error state?'); }
+      previousNumber = currentNumber;
+      currentNumber = input;
+      startingNewNumber = false;
+    } else {
+      currentNumber += input;
+    }
+  } else {
+    console.log('error in numberInput()');
+  }
+  updateDisplay();
+}
+
+function setOperator(input) {
+  if (currentNumber !== '') {
+    currentOperator = input;
+    startingNewNumber = true;
+  }
+  updateDisplay();
+}
+
+btn_equals.addEventListener('click', function() {
+  doMath();
+  updateDisplay();
+  startingNewNumber = true;
+});
+
+
+for(var i = 0; i < numberButtons.length; i++) {
+  numberButtons[i].addEventListener('click', function(){numberInput(this.innerText);});
+}
+
+for(var i = 0; i < operatorButtons.length; i++) {
+  operatorButtons[i].addEventListener('click', function(){setOperator(this.innerText);});
+}
 
 
 
 
+//functions for other behaviors
+function updateDisplay() {
+    numberDisplay.innerText = currentNumber;
+    operatorDisplay.innerText = currentOperator;
+}
+
+function clearAll() {
+  console.log('CLEAR');
+  currentNumber = '';
+  currentOperator = '';
+  startingNewNumber = false;
+  updateDisplay();
+}
 
 
+function doMath() {
+  var val1 = parseFloat(previousNumber);
+  var val2 = parseFloat(currentNumber);
+  var result;
 
-
-
-
-
+  if (currentOperator === '+'){
+    result = val1 + val2;
+    console.log(val1 + ' + ' + val2 + ' = ' + result);
+  }
+  else if (currentOperator === '-') {
+    result = val1 - val2;
+    console.log(val1 + ' - ' + val2 + ' = ' + result);
+  }
+  else if (currentOperator === '*') {
+    result = val1 * val2;
+    console.log(val1 + ' * ' + val2 + ' = ' + result);
+  }
+  else if (currentOperator === '/') {
+    result = val1 / val2;
+    console.log(val1 + ' / ' + val2 + ' = ' + result);
+  }
+  else if (currentOperator === '%') {
+    result = val1 % val2;
+    console.log(val1 + ' % ' + val2 + ' = ' + result);
+  }
+  else {
+    console.log('error');
+  }
+  currentNumber = result;
+  previousNumber = '';
+  startingNewNumber = false;
+  currentOperator = '';
+}
 
 
 
