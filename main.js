@@ -14,8 +14,6 @@ var currentOperator = '';
 var currentNumber = '';
 var previousNumber = '';
 
-var startingNewNumber = false;
-
 console.log(numberButtons);
 console.log(operatorButtons);
 console.log(btn_equals);
@@ -29,34 +27,49 @@ function numberInput(input) {
     clearAll();
   } else if(typeof input === 'string') {
     //input number
-    if(startingNewNumber) {
-      if(previousNumber !== '' && currentOperator !== ''){
-        doMath();
-      } else { console.log('is this a possible error state?'); }
-      previousNumber = currentNumber;
-      currentNumber = input;
-      startingNewNumber = false;
-    } else {
-      currentNumber += input;
-    }
-  } else {
-    console.log('error in numberInput()');
+    currentNumber += input;
   }
   updateDisplay();
 }
 
 function setOperator(input) {
-  if (currentNumber !== '') {
-    currentOperator = input;
-    startingNewNumber = true;
+
+
+
+  if( String(previousNumber) !== '' && String(currentNumber) ) {
+
   }
-  updateDisplay();
+
+
+
+  //if we have no currentNumber or previousNumber, do nothing
+
+  //if we're pushing operators continually before typing in a new number,
+  //just keep changing the operator w/ no other action
+
+  //else, add previousNumber to currentNumber,
+  //set previousNumber to result
+  //clear currentNumber
+  //set operator
+
+  /*if(String(currentNumber) === '' && String(previousNumber) === '') {
+    // do nothing
+  }
+  else if (String(currentNumber) === '' && String(previousNumber) !== '') {
+    currentOperator = input;
+  } else {
+    doMath();
+    previousNumber = currentNumber;
+    currentNumber = '';
+    currentOperator = input;
+  }
+  updateDisplay();*/
 }
 
 btn_equals.addEventListener('click', function() {
   doMath();
   updateDisplay();
-  startingNewNumber = true;
+
 });
 
 
@@ -81,175 +94,36 @@ function clearAll() {
   console.log('CLEAR');
   currentNumber = '';
   currentOperator = '';
-  startingNewNumber = false;
+
   updateDisplay();
 }
 
 
 function doMath() {
-  var val1 = parseFloat(previousNumber);
-  var val2 = parseFloat(currentNumber);
   var result;
 
   if (currentOperator === '+'){
-    result = val1 + val2;
-    console.log(val1 + ' + ' + val2 + ' = ' + result);
+    result = previousNumber + currentNumber;
+    console.log(previousNumber + ' + ' + currentNumber + ' = ' + result);
   }
   else if (currentOperator === '-') {
-    result = val1 - val2;
-    console.log(val1 + ' - ' + val2 + ' = ' + result);
+    result = previousNumber - currentNumber;
+    console.log(previousNumber + ' - ' + currentNumber + ' = ' + result);
   }
   else if (currentOperator === '*') {
-    result = val1 * val2;
-    console.log(val1 + ' * ' + val2 + ' = ' + result);
+    result = previousNumber * currentNumber;
+    console.log(previousNumber + ' * ' + currentNumber + ' = ' + result);
   }
   else if (currentOperator === '/') {
-    result = val1 / val2;
-    console.log(val1 + ' / ' + val2 + ' = ' + result);
+    result = previousNumber / currentNumber;
+    console.log(previousNumber + ' / ' + currentNumber + ' = ' + result);
   }
   else if (currentOperator === '%') {
-    result = val1 % val2;
-    console.log(val1 + ' % ' + val2 + ' = ' + result);
+    result = previousNumber % currentNumber;
+    console.log(previousNumber + ' % ' + currentNumber + ' = ' + result);
   }
   else {
     console.log('error');
   }
-  currentNumber = result;
-  previousNumber = '';
-  startingNewNumber = false;
-  currentOperator = '';
+  return result;
 }
-
-
-
-/*
-var currentNumber = '';
-var previousNumber = '';
-var currentOperator = '';
-
-var readyToReset = false;
-
-console.log('\n:::::::::::::: \n' +
-            '🔸 btn ➕ : ' + btn_add  + '\n' +
-            '🔸 btn ➖ : ' + btn_sub  + '\n' +
-            '🔸 btn ✖️ : ' + btn_mult  + '\n' +
-            '🔸 btn ➗ : ' + btn_div  + '\n' +
-            '🔸 btn % : ' + btn_mod  + '\n' +
-            '🔸 btn = : ' + btn_equals  + '\n' +
-            '🔸 number display = : ' + numberDisplay + '\n' +
-            ':::::::::::::::::::\n ');
-
-function updateDisplay() {
-    numberDisplay.innerText = currentNumber;
-}
-
-function clearAll() {
-  currentNumber = '';
-  previousNumber = '';
-  currentOperator = '';
-  updateDisplay();
-}
-
-// define functions
-function numberInput(button) {
-  if (button.name === 'C'){
-    clearAll();
-  }
-  else {
-    currentNumber = String(currentNumber) + button.name;
-    updateDisplay();
-  }
-}
-
-
-// set up event listenders
-
-for (var i = 0; i < numberButtons.length; i++) {
-  numberButtons[i].addEventListener('click', function(){
-    numberInput(this);
-  });
-}
-
-function doMath(operator) {
-  var val1 = parseFloat(previousNumber);
-  var val2 = parseFloat(currentNumber);
-  var result;
-
-  if (operator === 'add'){
-    result = val1 + val2;
-    console.log(val1 + ' + ' + val2 + ' = ' + result);
-  }
-  else if (operator === 'sub') {
-    result = val1 - val2;
-    console.log(val1 + ' - ' + val2 + ' = ' + result);
-  }
-  else if (operator === 'mult') {
-    result = val1 * val2;
-    console.log(val1 + ' * ' + val2 + ' = ' + result);
-  }
-  else if (operator === 'div') {
-    result = val1 / val2;
-    console.log(val1 + ' / ' + val2 + ' = ' + result);
-  }
-  else if (operator === 'mod') {
-    result = val1 % val2;
-    console.log(val1 + ' % ' + val2 + ' = ' + result);
-  }
-  else {
-    console.log('error');
-  }
-
-  currentNumber = result;
-  updateDisplay();
-
-}
-
-
-// actions
-btn_add.onclick = function() {
-  console.log('action: add ➕');
-  currentOperator = 'add';
-  previousNumber = currentNumber;
-  currentNumber = '';
-};
-
-btn_sub.onclick = function() {
-  console.log('action: subtract ➖');
-  currentOperator = 'sub';
-  previousNumber = currentNumber;
-  currentNumber = '';
-};
-
-btn_mult.onclick = function() {
-  console.log('action: multiply ✖️');
-  currentOperator = 'mult';
-  previousNumber = currentNumber;
-  currentNumber = '';
-};
-
-btn_div.onclick = function() {
-  console.log('action: divide ➗');
-  currentOperator = 'div';
-  previousNumber = currentNumber;
-  currentNumber = '';
-};
-
-btn_mod.onclick = function() {
-  console.log('action: mod %');
-  currentOperator = 'mod';
-  previousNumber = currentNumber;
-  currentNumber = '';
-};
-
-btn_equals.onclick = function() {
-  console.log('action: equals =');
-  doMath(currentOperator);
-  currentOperator = '';
-};
-
-
-
-
-// begin page!
-updateDisplay();
-*/
