@@ -131,6 +131,13 @@ form * {
   margin-left: 0;
   width: calc(100% - 7rem);
   display: block;
+  color: #FEFAEC;
+  background: #625772;
+  box-shadow: 0 .2rem 0 #4b4159,
+                0 .4rem 0 #453c53,
+                0 .6rem 0 #3f374d,
+                0 .8rem 0 #3b3147,
+                0 .8rem 5px rgba(53,106,129,.5);
 }
 .btn:active {
   transform: translateY(.4rem);
@@ -141,12 +148,24 @@ form * {
                 0 .4rem 0 #dacfbf,
                 0 .4rem 5px rgba(53,106,129,.5);
 }
+.btn.btn-equals:active {
+  transform: translateY(.4rem);
+  transition: .001s all ease;
+  box-shadow: 0 .05rem 0 #4b4159,
+                0 .1rem 0 #453c53,
+                0 .2rem 0 #3f374d,
+                0 .4rem 0 #3b3147,
+                0 .4rem 5px rgba(53,106,129,.5);
+}
 
 .btn:first-child {
   margin-left: 0;
 }
 .btn:hover {
   background-color: #fffef9;
+}
+.btn.btn-equals:hover {
+  background: #6f657e;
 }
 .btn:focus {
   /*border-color: #4796ff;
