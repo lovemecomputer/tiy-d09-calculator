@@ -7,12 +7,16 @@ console.dir(document);
 var numberButtons = document.querySelectorAll('.numbers .btn');
 var operatorButtons = document.querySelectorAll('.operators .btn');
 var btn_equals = document.querySelector('.btn-equals');
+var btn_flip = document.querySelector('.btn-flip');
+
 var numberDisplay = document.querySelector('#number-display-value');
 var operatorDisplay = document.querySelector('#operator-display');
 
 var currentOperator = '';
 var currentNumber = '';
 var previousNumber = '';
+
+var calculator = document.querySelector('.calculator');
 
 var solvedProblem = false;
 
@@ -159,3 +163,27 @@ function doMath() {
   }
   return result;
 }
+
+
+
+/* fun stuff */
+
+function flipCalculator() {
+  console.log('FLIP');
+  // calculator.className += ' flipped';
+  calculator.classList.toggle('flipped');
+}
+
+
+
+btn_flip.addEventListener('click', flipCalculator);
+
+
+
+
+
+
+
+
+
+//
