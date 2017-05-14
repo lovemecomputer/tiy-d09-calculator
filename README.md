@@ -1,10 +1,11 @@
-# TIY Week 2 day 09 assignment - calculator
+# TIY Week 2 day 09 - calculator
+
+Simple calculator with standard functions. One of my first assignments at The Iron Yard.
 
 **⭐️ live on surge: http://math-bud-2.surge.sh/ ⭐️**
 
 ---
 
-Simple calculator with standard functions. One of my first assignments at The Iron Yard.
 
 features:
 - chain operations without requiring the equals key
