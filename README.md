@@ -1,8 +1,6 @@
 # TIY Week 2 day 09 assignment - calculator
 
----
-
-__ ⭐️ live @ surge http://math-bud-2.surge.sh/ ⭐️ __
+**⭐️ live on surge: http://math-bud-2.surge.sh/ ⭐️**
 
 ---
 
