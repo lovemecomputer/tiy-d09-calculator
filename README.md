@@ -2,7 +2,7 @@
 
 ---
 
-** ⭐️ live @ surge http://math-bud-2.surge.sh/ ⭐️ **
+* ⭐️ live @ surge http://math-bud-2.surge.sh/ ⭐️ *
 
 ---
 
